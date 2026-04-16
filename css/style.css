@@ -1,0 +1,103 @@
+/* PharmaDroid — Global Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background: #F0F4F7;
+  color: #1E2D3A;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  background: #F0F4F7;
+}
+
+button { font-family: inherit; outline: none; }
+button:active { transform: scale(0.98); }
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 14px;
+}
+
+@keyframes pdSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Loading screen */
+#pd-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(160deg, #007A4D 0%, #00A86B 55%, #00C97D 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+#pd-loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+#pd-loading .pd-logo-box {
+  animation: pdFloat 2s ease-in-out infinite;
+}
+@keyframes pdFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+#pd-loading h1 {
+  color: white;
+  font-size: 30px;
+  font-weight: 800;
+  margin-top: 18px;
+  letter-spacing: -0.5px;
+}
+#pd-loading p {
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  margin-top: 6px;
+}
+#pd-loading .bar {
+  margin-top: 26px;
+  width: 160px;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+#pd-loading .bar-fill {
+  height: 100%;
+  width: 40%;
+  background: white;
+  border-radius: 100px;
+  animation: pdLoading 1.4s ease-in-out infinite;
+}
+@keyframes pdLoading {
+  0% { margin-left: -40%; }
+  100% { margin-left: 100%; }
+}
+
+button:focus-visible {
+  outline: 2px solid #00A86B;
+  outline-offset: 2px;
+}
+
+/* Disable zoom on iOS input focus */
+input[type="text"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], select, textarea {
+  font-size: 16px;
+}

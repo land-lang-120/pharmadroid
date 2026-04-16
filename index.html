@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#00A86B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="PharmaDroid — Ta pharmacie intelligente. Commande avant d'arriver, livraison a domicile, interactions medicamenteuses, rappels de prise.">
+  <title>PharmaDroid — Ta pharmacie intelligente</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="pd-loading">
+    <div class="pd-logo-box">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none">
+        <rect x="10" y="10" width="80" height="80" rx="22" fill="white"/>
+        <rect x="43" y="26" width="14" height="48" rx="4" fill="#00A86B"/>
+        <rect x="26" y="43" width="48" height="14" rx="4" fill="#00A86B"/>
+        <circle cx="50" cy="50" r="5" fill="white"/>
+      </svg>
+    </div>
+    <h1>PharmaDroid</h1>
+    <p>Ta pharmacie intelligente</p>
+    <div class="bar"><div class="bar-fill"></div></div>
+  </div>
+
+  <div id="root"></div>
+
+  <!-- React 18 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+
+  <!-- App bundle -->
+  <script src="bundle.js?v=1"></script>
+
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var l = document.getElementById('pd-loading');
+        if (l) {
+          l.classList.add('hide');
+          setTimeout(function() { if (l.parentNode) l.parentNode.removeChild(l); }, 500);
+        }
+      }, 1600);
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js').catch(function(e) { console.warn('SW failed:', e); });
+      });
+    }
+  </script>
+</body>
+</html>
