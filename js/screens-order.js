@@ -186,8 +186,10 @@ function CheckoutScreen(props) {
 
   var subtotal = items.reduce(function(s, it) { return s + (it.price || 2.50) * (it.qty || 1); }, 0);
   var fee = deliveryType === PD_DELIVERY.DELIVERY ? PD_DELIVERY_FEE : 0;
+  /* Sticky footer occupies ~220px with delivery fee row. Leave generous bottom padding. */
+  var footerPad = fee > 0 ? 230 : 190;
 
-  return React.createElement("div", { style: { paddingBottom: 120 } },
+  return React.createElement("div", { style: { paddingBottom: footerPad } },
     React.createElement("div", { style: { padding: "14px 22px", display: "flex", alignItems: "center", gap: 12, background: "white", borderBottom: "1px solid " + PD.grey200 } },
       React.createElement("button", { onClick: props.onBack, style: iconBtnStyle() }, Pdi.back),
       React.createElement("div", { style: { flex: 1, fontSize: 18, fontWeight: 800, color: PD.text } }, pd("newOrder"))
@@ -423,8 +425,9 @@ function OrderTrackScreen(props) {
       )
     ),
 
-    /* QR Code (when ready) */
-    (order.status === PD_ORDER_STATUS.READY || order.status === PD_ORDER_STATUS.DRIVER_ASSIGNED || order.status === PD_ORDER_STATUS.PICKED_UP) && React.createElement("div", { style: { padding: "0 22px 20px" } },
+    /* QR Code for pickup (when ready) */
+    order.deliveryType === PD_DELIVERY.PICKUP &&
+    (order.status === PD_ORDER_STATUS.READY) && React.createElement("div", { style: { padding: "0 22px 20px" } },
       React.createElement(PdCard, { style: { padding: 20, textAlign: "center" } },
         React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: PD.text, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 12 } }, pd("orderQR")),
         React.createElement("div", {
@@ -433,6 +436,31 @@ function OrderTrackScreen(props) {
         }),
         React.createElement("div", { style: { fontSize: 13, color: PD.textLight, marginTop: 14, letterSpacing: "0.1em", fontWeight: 700 } }, order.qrCode),
         React.createElement("div", { style: { fontSize: 12, color: PD.textMuted, marginTop: 6 } }, pd("showAtCounter"))
+      )
+    ),
+
+    /* Delivery PIN for home delivery (visible once driver is assigned) */
+    order.deliveryType === PD_DELIVERY.DELIVERY && order.deliveryPIN &&
+    (order.status === PD_ORDER_STATUS.DRIVER_ASSIGNED ||
+     order.status === PD_ORDER_STATUS.PICKED_UP ||
+     order.status === PD_ORDER_STATUS.DELIVERING) && React.createElement("div", { style: { padding: "0 22px 20px" } },
+      React.createElement(PdCard, { style: { padding: 24, textAlign: "center", border: "2px solid " + PD.green, background: PD.greenLight } },
+        React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: PD.greenDark, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 10 } }, "🔐 Code de livraison"),
+        React.createElement("div", {
+          style: {
+            fontSize: 42, fontWeight: 800, color: PD.greenDark,
+            letterSpacing: "0.3em", fontFamily: "'Plus Jakarta Sans',monospace",
+            padding: "12px 0", background: "white", borderRadius: 14,
+            margin: "0 auto", display: "inline-block",
+            minWidth: 220, boxShadow: "inset 0 0 0 2px " + PD.greenMid,
+          }
+        }, order.deliveryPIN.split("").join(" ")),
+        React.createElement("div", { style: { fontSize: 12, color: PD.textLight, marginTop: 14, lineHeight: 1.5, padding: "0 10px" } },
+          "Communique ce code au livreur uniquement a la reception."
+        ),
+        React.createElement("div", { style: { fontSize: 11, color: PD.red, marginTop: 8, fontWeight: 700 } },
+          "⚠️ Ne le partage JAMAIS avant d'avoir le colis en main."
+        )
       )
     ),
 

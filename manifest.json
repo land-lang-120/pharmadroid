@@ -1,6 +1,6 @@
 {
-  "name": "PharmaDroid",
-  "short_name": "PharmaDroid",
+  "name": "Pharmadroid",
+  "short_name": "Pharmadroid",
   "description": "Ta pharmacie intelligente et connectee. Commande, livraison, interactions, rappels.",
   "start_url": "./index.html",
   "display": "standalone",

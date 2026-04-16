@@ -54,7 +54,7 @@ const PD = {
 };
 
 /* App identity */
-const PD_APP_NAME    = "PharmaDroid";
+const PD_APP_NAME    = "Pharmadroid";
 const PD_APP_TAGLINE = "Ta pharmacie intelligente";
 const PD_VERSION     = "1.0.0";
 

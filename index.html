@@ -6,24 +6,34 @@
   <meta name="theme-color" content="#00A86B">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="PharmaDroid — Ta pharmacie intelligente. Commande avant d'arriver, livraison a domicile, interactions medicamenteuses, rappels de prise.">
-  <title>PharmaDroid — Ta pharmacie intelligente</title>
+  <meta name="description" content="Pharmadroid — Ta pharmacie intelligente. Commande avant d'arriver, livraison a domicile, interactions medicamenteuses, rappels de prise.">
+  <title>Pharmadroid — Ta pharmacie intelligente</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
   <!-- Loading screen -->
   <div id="pd-loading">
     <div class="pd-logo-box">
-      <svg width="110" height="110" viewBox="0 0 100 100" fill="none">
-        <rect x="10" y="10" width="80" height="80" rx="22" fill="white"/>
-        <rect x="43" y="26" width="14" height="48" rx="4" fill="#00A86B"/>
-        <rect x="26" y="43" width="48" height="14" rx="4" fill="#00A86B"/>
-        <circle cx="50" cy="50" r="5" fill="white"/>
+      <svg width="140" height="150" viewBox="0 0 120 130" fill="none">
+        <line x1="42" y1="20" x2="33" y2="8" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="31" cy="6" r="3.5" fill="white"/>
+        <line x1="78" y1="20" x2="87" y2="8" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="89" cy="6" r="3.5" fill="white"/>
+        <path d="M26 44 C26 28 40 18 60 18 C80 18 94 28 94 44 L94 60 C94 65 90 68 85 68 L35 68 C30 68 26 65 26 60 Z" fill="white"/>
+        <circle cx="45" cy="42" r="5" fill="#00A86B"/>
+        <circle cx="75" cy="42" r="5" fill="#00A86B"/>
+        <rect x="28" y="72" width="64" height="44" rx="8" fill="white"/>
+        <rect x="14" y="72" width="12" height="34" rx="6" fill="white"/>
+        <rect x="94" y="72" width="12" height="34" rx="6" fill="white"/>
+        <rect x="36" y="85" width="48" height="18" rx="4" fill="#00A86B"/>
+        <rect x="51" y="76" width="18" height="36" rx="4" fill="#00A86B"/>
+        <rect x="36" y="118" width="18" height="10" rx="5" fill="rgba(255,255,255,0.5)"/>
+        <rect x="66" y="118" width="18" height="10" rx="5" fill="rgba(255,255,255,0.5)"/>
       </svg>
     </div>
-    <h1>PharmaDroid</h1>
+    <h1>Pharmadroid</h1>
     <p>Ta pharmacie intelligente</p>
     <div class="bar"><div class="bar-fill"></div></div>
   </div>
@@ -35,7 +45,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin></script>
 
   <!-- App bundle -->
-  <script src="bundle.js?v=1"></script>
+  <script src="bundle.js?v=2"></script>
 
   <script>
     window.addEventListener('load', function() {

@@ -5,7 +5,7 @@ var _pdLang = localStorage.getItem(PD_KEYS.lang) || "fr";
 const PD_I18N = {
   /* ═══ FRANCAIS ═══ */
   fr: {
-    appName: "PharmaDroid",
+    appName: "Pharmadroid",
     tagline: "Ta pharmacie intelligente",
     loading: "Chargement...",
 
@@ -233,6 +233,8 @@ const PD_I18N = {
     deliveryFee: "Frais de livraison",
     deliveryTotal: "Total avec livraison",
     trackOrder: "Suivre ma commande",
+    driverAssignedLabel: "Livreur assigne",
+    driverPickedUpLabel: "Colis recupere",
     driverOnWay: "Livreur en route",
     driverArrivedPharmacy: "Livreur a la pharmacie",
     driverArrivedHome: "Livreur arrive",
@@ -310,7 +312,7 @@ const PD_I18N = {
     resubmit: "Resoumettre",
 
     /* Onboarding */
-    welcome: "Bienvenue sur PharmaDroid",
+    welcome: "Bienvenue sur Pharmadroid",
     welcomeDesc: "Ta pharmacie intelligente et connectee",
     onb1Title: "Commande avant d'arriver",
     onb1Desc: "Scanne ton ordonnance chez toi, la pharmacie prepare, tu passes recuperer",
@@ -324,7 +326,7 @@ const PD_I18N = {
 
   /* ═══ ENGLISH ═══ */
   en: {
-    appName: "PharmaDroid", tagline: "Your smart pharmacy", loading: "Loading...",
+    appName: "Pharmadroid", tagline: "Your smart pharmacy", loading: "Loading...",
     navHome: "Home", navSearch: "Search", navScan: "Scan", navOrders: "Orders",
     navProfile: "Profile", navSettings: "Settings",
     search: "Search", cancel: "Cancel", ok: "OK", confirm: "Confirm", save: "Save",
@@ -400,7 +402,7 @@ const PD_I18N = {
     tapToScan: "Tap to scan", prescription: "Prescription", box: "Box",
     pill: "Pill", tablet: "Tablet", capsule: "Capsule", syrup: "Syrup",
     injection: "Injection", cream: "Cream", drops: "Drops", patch: "Patch",
-    welcome: "Welcome to PharmaDroid",
+    welcome: "Welcome to Pharmadroid",
     welcomeDesc: "Your smart connected pharmacy",
     onb1Title: "Order before you arrive",
     onb1Desc: "Scan your prescription at home, the pharmacy prepares, you pick up",
@@ -414,7 +416,10 @@ const PD_I18N = {
     deliveryOption: "Home delivery",
     deliveryDesc: "A verified driver brings it to you",
     deliveryFee: "Delivery fee", deliveryTotal: "Total with delivery",
-    trackOrder: "Track my order", driverOnWay: "Driver on the way",
+    trackOrder: "Track my order",
+    driverAssignedLabel: "Driver assigned",
+    driverPickedUpLabel: "Package picked up",
+    driverOnWay: "Driver on the way",
     driverArrivedPharmacy: "Driver at pharmacy",
     driverArrivedHome: "Driver arrived",
     estDeliveryTime: "Estimated arrival", delivered: "Delivered",
@@ -470,33 +475,33 @@ function pdAddLang(code, name, tagline, greeting, search, nav) {
     navScan: nav.scan, navOrders: nav.orders, navProfile: nav.profile,
   });
 }
-pdAddLang("es", "PharmaDroid", "Tu farmacia inteligente", "Buenos dias",
+pdAddLang("es", "Pharmadroid", "Tu farmacia inteligente", "Buenos dias",
   "Buscar", { home: "Inicio", search: "Buscar", scan: "Escanear", orders: "Pedidos", profile: "Perfil" });
-pdAddLang("pt", "PharmaDroid", "Sua farmacia inteligente", "Bom dia",
+pdAddLang("pt", "Pharmadroid", "Sua farmacia inteligente", "Bom dia",
   "Buscar", { home: "Inicio", search: "Buscar", scan: "Escanear", orders: "Pedidos", profile: "Perfil" });
-pdAddLang("de", "PharmaDroid", "Deine intelligente Apotheke", "Guten Morgen",
+pdAddLang("de", "Pharmadroid", "Deine intelligente Apotheke", "Guten Morgen",
   "Suchen", { home: "Start", search: "Suchen", scan: "Scannen", orders: "Bestellungen", profile: "Profil" });
-pdAddLang("it", "PharmaDroid", "La tua farmacia intelligente", "Buongiorno",
+pdAddLang("it", "Pharmadroid", "La tua farmacia intelligente", "Buongiorno",
   "Cerca", { home: "Home", search: "Cerca", scan: "Scansiona", orders: "Ordini", profile: "Profilo" });
-pdAddLang("nl", "PharmaDroid", "Jouw slimme apotheek", "Goedemorgen",
+pdAddLang("nl", "Pharmadroid", "Jouw slimme apotheek", "Goedemorgen",
   "Zoeken", { home: "Home", search: "Zoeken", scan: "Scan", orders: "Bestellingen", profile: "Profiel" });
-pdAddLang("tr", "PharmaDroid", "Akilli eczaneniz", "Gunaydin",
+pdAddLang("tr", "Pharmadroid", "Akilli eczaneniz", "Gunaydin",
   "Ara", { home: "Ana sayfa", search: "Ara", scan: "Tara", orders: "Siparisler", profile: "Profil" });
-pdAddLang("ru", "PharmaDroid", "Vasha umnaya apteka", "Dobroye utro",
+pdAddLang("ru", "Pharmadroid", "Vasha umnaya apteka", "Dobroye utro",
   "Poisk", { home: "Glavnaya", search: "Poisk", scan: "Skan", orders: "Zakazy", profile: "Profil" });
-pdAddLang("ar", "PharmaDroid", "Saydaliyatuka adh-dhakiyya", "Sabah al-khayr",
+pdAddLang("ar", "Pharmadroid", "Saydaliyatuka adh-dhakiyya", "Sabah al-khayr",
   "Bahth", { home: "Ar-ra'isiyya", search: "Bahth", scan: "Mashh", orders: "Talabat", profile: "Al-malaf" });
-pdAddLang("zh", "PharmaDroid", "Nin de zhineng yaodian", "Zao shang hao",
+pdAddLang("zh", "Pharmadroid", "Nin de zhineng yaodian", "Zao shang hao",
   "Sousuo", { home: "Shouye", search: "Sousuo", scan: "Saomiao", orders: "Dingdan", profile: "Gerenziliao" });
-pdAddLang("ja", "PharmaDroid", "Anata no sumato yakkyoku", "Ohayou",
+pdAddLang("ja", "Pharmadroid", "Anata no sumato yakkyoku", "Ohayou",
   "Kensaku", { home: "Homu", search: "Kensaku", scan: "Sukyan", orders: "Chumon", profile: "Purofairu" });
-pdAddLang("ko", "PharmaDroid", "Danshin-ui smart yakguk", "Annyeonghaseyo",
+pdAddLang("ko", "Pharmadroid", "Danshin-ui smart yakguk", "Annyeonghaseyo",
   "Geomsaek", { home: "Hom", search: "Geomsaek", scan: "Seukaen", orders: "Jumun", profile: "Peuropil" });
-pdAddLang("hi", "PharmaDroid", "Aapki smart pharmacy", "Namaste",
+pdAddLang("hi", "Pharmadroid", "Aapki smart pharmacy", "Namaste",
   "Khojo", { home: "Ghar", search: "Khojo", scan: "Scan", orders: "Orders", profile: "Profile" });
-pdAddLang("sw", "PharmaDroid", "Duka lako la dawa la akili", "Habari ya asubuhi",
+pdAddLang("sw", "Pharmadroid", "Duka lako la dawa la akili", "Habari ya asubuhi",
   "Tafuta", { home: "Nyumbani", search: "Tafuta", scan: "Changanua", orders: "Maagizo", profile: "Wasifu" });
-pdAddLang("pl", "PharmaDroid", "Twoja inteligentna apteka", "Dzien dobry",
+pdAddLang("pl", "Pharmadroid", "Twoja inteligentna apteka", "Dzien dobry",
   "Szukaj", { home: "Glowna", search: "Szukaj", scan: "Skanuj", orders: "Zamowienia", profile: "Profil" });
 
 /* Translation lookup */

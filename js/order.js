@@ -8,6 +8,7 @@
 
 function pdCreateOrder(items, pharmacyId, deliveryType, address) {
   var pharmacy = pdFindPharmacy(pharmacyId);
+  var isDelivery = deliveryType === PD_DELIVERY.DELIVERY;
   var order = {
     items: items || [],
     pharmacyId: pharmacyId,
@@ -16,14 +17,27 @@ function pdCreateOrder(items, pharmacyId, deliveryType, address) {
     address: address || "",
     status: PD_ORDER_STATUS.SENT,
     estPrepTime: pharmacy ? pharmacy.avgPrepTime : 10,
-    deliveryFee: deliveryType === PD_DELIVERY.DELIVERY ? PD_DELIVERY_FEE : 0,
+    deliveryFee: isDelivery ? PD_DELIVERY_FEE : 0,
     driverId: null,
     driverName: null,
     qrCode: pdGenerateQRData(),
+    deliveryPIN: isDelivery ? pdGenerateDeliveryPIN() : null,
     timeline: [{ status: PD_ORDER_STATUS.SENT, at: Date.now() }],
   };
   order.id = pdAddOrder(order);
   return order;
+}
+
+/* 4-digit PIN that client shows driver to confirm reception. Never shown to driver in-app. */
+function pdGenerateDeliveryPIN() {
+  return String(1000 + Math.floor(Math.random() * 9000));
+}
+
+/* Driver attempts delivery with a PIN — returns true if match */
+function pdVerifyDeliveryPIN(orderId, pin) {
+  var order = pdFindOrder(orderId);
+  if (!order) return false;
+  return order.deliveryPIN && String(order.deliveryPIN) === String(pin);
 }
 
 function pdGenerateQRData() {
@@ -90,8 +104,8 @@ function pdOrderStatusLabel(status) {
     case PD_ORDER_STATUS.SENT:           return pd("orderSent");
     case PD_ORDER_STATUS.PREPARING:      return pd("orderPreparing");
     case PD_ORDER_STATUS.READY:          return pd("orderReady");
-    case PD_ORDER_STATUS.DRIVER_ASSIGNED:return pd("driverOnWay");
-    case PD_ORDER_STATUS.PICKED_UP:      return pd("driverArrivedPharmacy");
+    case PD_ORDER_STATUS.DRIVER_ASSIGNED:return pd("driverAssignedLabel");
+    case PD_ORDER_STATUS.PICKED_UP:      return pd("driverPickedUpLabel");
     case PD_ORDER_STATUS.DELIVERING:     return pd("driverOnWay");
     case PD_ORDER_STATUS.COLLECTED:      return pd("delivered");
     case PD_ORDER_STATUS.CANCELLED:      return pd("orderCancelled");

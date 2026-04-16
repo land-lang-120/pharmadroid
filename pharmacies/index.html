@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#00A86B">
+  <title>PharmaDroid — Portail Pharmacies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --green:#00A86B; --green-dark:#007A4D; --green-darker:#005934;
+      --green-light:#E6F7F1; --green-mid:#B3E8D4;
+      --text:#1E2D3A; --text-light:#5A6B7A; --text-muted:#9AAAB8;
+      --grey-50:#F8FAFB; --grey-100:#F0F4F7; --grey-200:#DDE4EC;
+      --red:#FF4757; --orange:#FF6B35; --blue:#4F80FF; --yellow:#FFB800;
+      --shadow:0 1px 3px rgba(15,26,36,0.08);
+      --shadow-md:0 4px 12px rgba(15,26,36,0.10);
+      --shadow-green:0 6px 20px rgba(0,168,107,0.3);
+    }
+    html, body { font-family:'Plus Jakarta Sans',system-ui,sans-serif; color:var(--text); background:var(--grey-50); line-height:1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--green); text-decoration:none; }
+
+    /* ═══ Landing ═══ */
+    .nav {
+      position:sticky; top:0; z-index:100;
+      padding:16px 32px; background: rgba(248,250,251,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--grey-200);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; color: var(--text); }
+    .brand-badge { background: var(--green); color:white; font-size:10px; font-weight:700; padding:3px 8px; border-radius:100px; letter-spacing:0.05em; text-transform:uppercase; }
+    .nav-links { display:flex; gap:24px; list-style:none; align-items:center; }
+    .nav-links a { font-weight:600; font-size:14px; color: var(--text-light); }
+    .nav-links a:hover { color: var(--green); }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 22px; border-radius:12px;
+      font-weight:700; font-size:14px; cursor:pointer;
+      border:none; font-family:inherit; transition: transform 0.12s;
+      text-decoration:none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background:linear-gradient(135deg,var(--green),var(--green-dark)); color:white; box-shadow: var(--shadow-green); }
+    .btn-outline { background: transparent; border: 1.5px solid var(--green); color: var(--green); }
+    .btn-ghost { background: transparent; color: var(--text); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 32px 100px; text-align:center;
+      background: linear-gradient(180deg, var(--green-light) 0%, var(--grey-50) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px); line-height:1.1;
+      font-weight:800; letter-spacing:-1px;
+      margin-bottom:20px; color: var(--text);
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p.sub { font-size: 18px; color: var(--text-light); max-width: 640px; margin: 0 auto 32px; }
+    .hero-cta { display:flex; gap:12px; justify-content:center; flex-wrap: wrap; }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px; margin-bottom:20px;
+      padding:8px 16px; border-radius:100px;
+      background: white; border:1px solid var(--green-mid);
+      font-size: 13px; font-weight:600; color: var(--green-dark);
+    }
+    .hero-badge::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--green); }
+
+    /* Stats */
+    .stats {
+      display:flex; justify-content:center; gap:60px; flex-wrap: wrap;
+      padding: 50px 32px; background:white;
+      border-top: 1px solid var(--grey-200); border-bottom: 1px solid var(--grey-200);
+    }
+    .stat { text-align:center; }
+    .stat-num { font-size: 36px; font-weight:800; color: var(--green-dark); }
+    .stat-label { font-size: 13px; color: var(--text-light); font-weight:600; margin-top:4px; }
+
+    /* Benefits */
+    .section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+    .section-title { font-size: clamp(26px, 3.5vw, 38px); font-weight:800; text-align:center; margin-bottom: 12px; letter-spacing:-0.5px; }
+    .section-sub { font-size: 16px; color: var(--text-light); text-align:center; margin-bottom: 48px; max-width:580px; margin-left:auto; margin-right:auto; }
+    .benefits { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .benefit {
+      background: white; padding: 28px; border-radius: 20px;
+      border: 1px solid var(--grey-200); box-shadow: var(--shadow);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .benefit:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .benefit-icon { font-size: 34px; margin-bottom: 14px; }
+    .benefit h3 { font-size: 17px; font-weight:800; margin-bottom:8px; }
+    .benefit p { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      padding: 80px 32px; text-align:center; color: white;
+      margin-top: 40px;
+    }
+    .cta-section h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight:800; margin-bottom:14px; }
+    .cta-section p { font-size: 16px; opacity: 0.9; max-width: 520px; margin: 0 auto 30px; }
+    .cta-section .btn-primary { background: white; color: var(--green-dark); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+    /* Form modal */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:1000;
+      background: rgba(15,26,36,0.6); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: white; max-width: 480px; width: 100%;
+      border-radius: 24px; padding: 30px; max-height: 90vh; overflow-y: auto;
+      transform: scale(0.95); transition: transform 0.2s;
+    }
+    .modal-overlay.open .modal { transform: scale(1); }
+    .modal h2 { font-size: 22px; font-weight:800; margin-bottom: 6px; }
+    .modal p.sub { font-size: 13px; color: var(--text-light); margin-bottom: 22px; }
+    label { display: block; font-size: 12px; font-weight:700; color: var(--text-light); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 14px; margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--grey-200); background: var(--grey-50);
+      font-family: inherit; font-size: 14px; color: var(--text); outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--green); background: white; }
+    textarea { resize: vertical; min-height: 80px; }
+    .file-upload {
+      display: block; padding: 14px; border-radius: 12px;
+      border: 2px dashed var(--grey-200); background: var(--grey-50);
+      text-align: center; cursor: pointer; font-size: 13px; color: var(--text-light);
+    }
+    .file-upload:hover { border-color: var(--green); color: var(--green); }
+    .file-upload.filled { border-color: var(--green); color: var(--green); background: var(--green-light); }
+    .form-actions { display: flex; gap: 10px; margin-top: 24px; }
+    .form-actions .btn { flex: 1; }
+
+    /* Success overlay */
+    .success-overlay {
+      position:fixed; inset:0; z-index:1001;
+      background: white; display:none; flex-direction: column;
+      align-items:center; justify-content:center; padding: 30px; text-align:center;
+    }
+    .success-overlay.open { display: flex; }
+    .success-overlay .icon { font-size: 80px; margin-bottom: 20px; animation: bounce 0.6s; }
+    .success-overlay h2 { font-size: 28px; font-weight:800; margin-bottom: 12px; }
+    .success-overlay p { font-size: 16px; color: var(--text-light); max-width: 480px; margin-bottom: 24px; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Dashboard */
+    .dashboard {
+      min-height: 100vh; background: var(--grey-100);
+      display: none;
+    }
+    .dashboard.active { display: block; }
+    .dash-header {
+      background: white; padding: 18px 32px; border-bottom: 1px solid var(--grey-200);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .dash-main { padding: 32px; max-width: 1100px; margin: 0 auto; }
+    .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .dash-card {
+      background: white; padding: 20px; border-radius: 16px; box-shadow: var(--shadow);
+      border-top: 3px solid var(--green);
+    }
+    .dash-card .label { font-size: 11px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; }
+    .dash-card .value { font-size: 28px; font-weight: 800; color: var(--text); margin-top: 6px; }
+    .orders-list { background: white; border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .order-row { padding: 14px 0; border-bottom: 1px solid var(--grey-100); display: flex; align-items: center; gap: 14px; }
+    .order-row:last-child { border: none; }
+    .order-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .order-info { flex: 1; min-width: 0; }
+    .order-name { font-weight: 700; font-size: 14px; }
+    .order-meta { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+    .order-status { padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+
+    /* Footer */
+    footer {
+      padding: 40px 32px; text-align: center;
+      background: var(--text); color: white;
+    }
+    footer p { font-size: 13px; opacity: 0.7; margin-bottom: 6px; }
+    footer a { color: var(--green-mid); }
+
+    @media (max-width: 640px) {
+      .nav { padding: 14px 20px; }
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding: 50px 20px 70px; }
+      .section { padding: 50px 20px; }
+      .stats { gap: 30px; padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="brand">
+    <svg width="36" height="40" viewBox="0 0 120 130" fill="none">
+      <line x1="42" y1="20" x2="33" y2="8" stroke="#00A86B" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="31" cy="6" r="3.5" fill="#00A86B"/>
+      <line x1="78" y1="20" x2="87" y2="8" stroke="#00A86B" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="89" cy="6" r="3.5" fill="#00A86B"/>
+      <path d="M26 44 C26 28 40 18 60 18 C80 18 94 28 94 44 L94 60 C94 65 90 68 85 68 L35 68 C30 68 26 65 26 60 Z" fill="#00A86B"/>
+      <circle cx="45" cy="42" r="5" fill="white"/>
+      <circle cx="75" cy="42" r="5" fill="white"/>
+      <rect x="28" y="72" width="64" height="44" rx="8" fill="#00A86B"/>
+      <rect x="14" y="72" width="12" height="34" rx="6" fill="#00A86B"/>
+      <rect x="94" y="72" width="12" height="34" rx="6" fill="#00A86B"/>
+      <rect x="36" y="85" width="48" height="18" rx="4" fill="white"/>
+      <rect x="51" y="76" width="18" height="36" rx="4" fill="white"/>
+    </svg>
+    <span>PharmaDroid</span>
+    <span class="brand-badge">Pharmacies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#benefits">Avantages</a></li>
+    <li><a href="#how">Comment ca marche</a></li>
+    <li><a href="#" class="btn btn-ghost" onclick="openLogin(); return false;">Connexion</a></li>
+    <li><a href="#" class="btn btn-primary" onclick="openRegister(); return false;">S'inscrire</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Nouveau sur PharmaDroid</div>
+  <h1>Deviens une pharmacie<br><span class="gradient">connectee & moderne</span></h1>
+  <p class="sub">Recois des commandes pre-validees par tes clients, prepare-les en avance, et beneficie du reseau de livreurs verifies de PharmaDroid.</p>
+  <div class="hero-cta">
+    <a href="#" class="btn btn-primary" onclick="openRegister(); return false;">🚀 Inscrire ma pharmacie</a>
+    <a href="#how" class="btn btn-outline">En savoir plus</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat">
+    <div class="stat-num">+40%</div>
+    <div class="stat-label">Commandes preparees</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">-3 min</div>
+    <div class="stat-label">Temps d'attente client</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Reception des commandes</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0 €</div>
+    <div class="stat-label">Frais d'inscription</div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section" id="benefits">
+  <h2 class="section-title">Pourquoi rejoindre PharmaDroid ?</h2>
+  <p class="section-sub">Des outils pros pour transformer ton officine en pharmacie connectee.</p>
+  <div class="benefits">
+    <div class="benefit">
+      <div class="benefit-icon">📱</div>
+      <h3>Commandes pre-scannees</h3>
+      <p>Les clients scannent leur ordonnance chez eux. Tu recois la commande complete, tu prepares en avance, ils passent recuperer.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🚴</div>
+      <h3>Livraisons integrees</h3>
+      <p>Notre reseau de livreurs verifies (piece d'identite obligatoire) livre tes clients a domicile. Tu n'as rien a gerer logistiquement.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">💳</div>
+      <h3>Paiements securises</h3>
+      <p>Mobile Money, CB, virement — on gere tous les moyens de paiement. Reversement hebdomadaire sur ton compte.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">📊</div>
+      <h3>Tableau de bord pro</h3>
+      <p>Suivi en temps reel des commandes, statistiques ventes, top produits, clients fideles. Tout au meme endroit.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">⭐</div>
+      <h3>Visibilite accrue</h3>
+      <p>Apparais dans l'app a des milliers de clients a proximite. Note, avis, et ranking te positionnent parmi les meilleurs.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🔒</div>
+      <h3>100% conforme</h3>
+      <p>Respect des ordonnances, tracabilite complete, archivage securise 5 ans. Ton officine reste dans les clous legaux.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <h2 class="section-title">Comment ca marche ?</h2>
+  <p class="section-sub">4 etapes simples pour rejoindre le reseau.</p>
+  <div class="benefits">
+    <div class="benefit">
+      <div class="benefit-icon" style="color: var(--green); font-weight: 800; font-size: 28px;">1</div>
+      <h3>Inscription en ligne</h3>
+      <p>Remplis le formulaire ci-contre avec tes informations professionnelles et documents legaux (licence, RCCM, piece ID).</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon" style="color: var(--green); font-weight: 800; font-size: 28px;">2</div>
+      <h3>Validation (24-48h)</h3>
+      <p>Notre equipe verifie tes documents. Si tout est bon, on t'envoie tes acces au dashboard.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon" style="color: var(--green); font-weight: 800; font-size: 28px;">3</div>
+      <h3>Configure ton catalogue</h3>
+      <p>Horaires, services proposes, stock de medicaments — tu gardes le controle total.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon" style="color: var(--green); font-weight: 800; font-size: 28px;">4</div>
+      <h3>Recois tes commandes</h3>
+      <p>Les clients te trouvent dans l'app, commandent, et viennent recuperer. Simple et efficace.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Pret a rejoindre le reseau ?</h2>
+  <p>Inscription gratuite. Aucune carte bancaire requise. Validation sous 48h ouvrees.</p>
+  <a href="#" class="btn btn-primary" onclick="openRegister(); return false;" style="font-size:15px; padding:16px 32px;">📝 Inscrire ma pharmacie</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 PharmaDroid — CloneX Studio</p>
+  <p><a href="../index.html">🔙 Retour a l'app mobile</a></p>
+</footer>
+
+<!-- REGISTER MODAL -->
+<div class="modal-overlay" id="modal-register">
+  <div class="modal">
+    <h2>📋 Inscription Pharmacie</h2>
+    <p class="sub">Remplis les informations ci-dessous. Validation par notre equipe sous 48h.</p>
+
+    <form onsubmit="return submitRegister(event);">
+      <label>Nom de la pharmacie</label>
+      <input type="text" name="name" required placeholder="Pharmacie Centrale">
+
+      <label>Adresse complete</label>
+      <input type="text" name="address" required placeholder="12 Rue de la Liberte, Douala">
+
+      <label>Telephone</label>
+      <input type="tel" name="phone" required placeholder="+237 699 XX XX XX">
+
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="contact@pharmacie.cm">
+
+      <label>Numero de licence</label>
+      <input type="text" name="license" required placeholder="Ex: PH-237-001234">
+
+      <label>RCCM / N° SIRET</label>
+      <input type="text" name="rccm" required placeholder="Ex: RC/DLA/2024/A/1234">
+
+      <label>Horaires d'ouverture</label>
+      <input type="text" name="hours" required placeholder="Ex: Lun-Sam 8h-20h, Dim 9h-13h">
+
+      <label>Services proposes</label>
+      <select name="services" multiple size="3">
+        <option value="delivery">Livraison a domicile</option>
+        <option value="onduty">Pharmacie de garde</option>
+        <option value="vaccination">Vaccinations</option>
+      </select>
+
+      <label>Licence professionnelle (PDF/JPG)</label>
+      <label class="file-upload" id="file-license-label" for="file-license">
+        📄 Cliquer pour telecharger
+      </label>
+      <input type="file" id="file-license" accept="image/*,application/pdf" style="display:none" onchange="onFilePicked(this, 'file-license-label')" required>
+
+      <label>Message (optionnel)</label>
+      <textarea name="message" placeholder="Informations supplementaires..."></textarea>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-register')">Annuler</button>
+        <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <h2>🔐 Connexion Pharmacie</h2>
+    <p class="sub">Acces reserve aux pharmacies validees.</p>
+
+    <form onsubmit="return submitLogin(event);">
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="contact@pharmacie.cm">
+
+      <label>Mot de passe</label>
+      <input type="password" name="password" required>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-login')">Annuler</button>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="success">
+  <div class="icon">✅</div>
+  <h2>Demande envoyee !</h2>
+  <p>Merci de ton interet pour PharmaDroid. Notre equipe examine ta demande et te repondra par email sous 24-48h ouvrees.</p>
+  <button class="btn btn-primary" onclick="document.getElementById('success').classList.remove('open');">Retour a l'accueil</button>
+</div>
+
+<!-- DASHBOARD (demo) -->
+<div class="dashboard" id="dashboard">
+  <div class="dash-header">
+    <div class="brand">
+      <svg width="28" height="30" viewBox="0 0 120 130" fill="none">
+        <path d="M26 44 C26 28 40 18 60 18 C80 18 94 28 94 44 L94 60 C94 65 90 68 85 68 L35 68 C30 68 26 65 26 60 Z" fill="#00A86B"/>
+        <rect x="28" y="72" width="64" height="44" rx="8" fill="#00A86B"/>
+        <rect x="36" y="85" width="48" height="18" rx="4" fill="white"/>
+        <rect x="51" y="76" width="18" height="36" rx="4" fill="white"/>
+      </svg>
+      <span>Dashboard Pharmacie Centrale</span>
+    </div>
+    <button class="btn btn-ghost" onclick="logout()">Deconnexion</button>
+  </div>
+  <div class="dash-main">
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="label">Commandes aujourd'hui</div>
+        <div class="value">12</div>
+      </div>
+      <div class="dash-card">
+        <div class="label">En preparation</div>
+        <div class="value">3</div>
+      </div>
+      <div class="dash-card">
+        <div class="label">CA du jour</div>
+        <div class="value">248 €</div>
+      </div>
+      <div class="dash-card">
+        <div class="label">Note moyenne</div>
+        <div class="value">⭐ 4.8</div>
+      </div>
+    </div>
+
+    <h3 style="margin: 24px 0 14px; font-weight: 800;">Commandes en cours</h3>
+    <div class="orders-list">
+      <div class="order-row">
+        <div class="order-icon">📦</div>
+        <div class="order-info">
+          <div class="order-name">Amadou K. — 2 articles</div>
+          <div class="order-meta">Doliprane, Humex • Il y a 3 min</div>
+        </div>
+        <div class="order-status" style="background:#FFB80020;color:#B8860B">En preparation</div>
+      </div>
+      <div class="order-row">
+        <div class="order-icon">🚴</div>
+        <div class="order-info">
+          <div class="order-name">Fatima N. — 1 article (livraison)</div>
+          <div class="order-meta">Aspirine 500 • Il y a 12 min</div>
+        </div>
+        <div class="order-status" style="background:#00A86B20;color:#00A86B">Prete</div>
+      </div>
+      <div class="order-row">
+        <div class="order-icon">📦</div>
+        <div class="order-info">
+          <div class="order-name">Boris T. — 3 articles</div>
+          <div class="order-meta">Voltarene, Nurofen, Strepsils • Il y a 18 min</div>
+        </div>
+        <div class="order-status" style="background:#FF6B3520;color:#FF6B35">Nouvelle</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openRegister() { document.getElementById('modal-register').classList.add('open'); }
+function openLogin() { document.getElementById('modal-login').classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function onFilePicked(input, labelId) {
+  var label = document.getElementById(labelId);
+  if (input.files && input.files[0]) {
+    label.textContent = '✓ ' + input.files[0].name;
+    label.classList.add('filled');
+  }
+}
+
+function submitRegister(e) {
+  e.preventDefault();
+  /* In production: POST to backend /api/pharmacies/register */
+  var form = e.target;
+  var data = {};
+  Array.from(form.elements).forEach(function(el) {
+    if (el.name) data[el.name] = el.value;
+  });
+  console.log('Pharmacy registration submitted:', data);
+  /* Save locally for demo */
+  try {
+    localStorage.setItem('pd_pharmacy_pending', JSON.stringify(Object.assign({}, data, { submittedAt: Date.now() })));
+  } catch (err) {}
+
+  closeModal('modal-register');
+  document.getElementById('success').classList.add('open');
+  form.reset();
+  return false;
+}
+
+function submitLogin(e) {
+  e.preventDefault();
+  /* In production: POST /api/pharmacies/login */
+  /* For demo: show dashboard */
+  closeModal('modal-login');
+  document.getElementById('dashboard').classList.add('active');
+  document.querySelector('nav').style.display = 'none';
+  document.querySelectorAll('section, footer').forEach(function(el) { el.style.display = 'none'; });
+  return false;
+}
+
+function logout() {
+  document.getElementById('dashboard').classList.remove('active');
+  document.querySelector('nav').style.display = '';
+  document.querySelectorAll('section, footer').forEach(function(el) { el.style.display = ''; });
+}
+
+/* Close modals on overlay click */
+document.querySelectorAll('.modal-overlay').forEach(function(m) {
+  m.addEventListener('click', function(e) {
+    if (e.target === m) m.classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>

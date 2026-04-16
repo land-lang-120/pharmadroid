@@ -1,9 +1,9 @@
 /* PharmaDroid — Service Worker */
 
-const CACHE_NAME = "pharmadroid-v1";
+const CACHE_NAME = "pharmadroid-v2";
 const ASSETS = [
   "./", "./index.html", "./manifest.json",
-  "./bundle.js?v=1", "./css/style.css?v=1",
+  "./bundle.js?v=2", "./css/style.css?v=2",
   "./icons/icon-192.svg", "./icons/icon-512.svg",
   "https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js",

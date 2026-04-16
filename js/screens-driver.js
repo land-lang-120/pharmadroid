@@ -298,8 +298,30 @@ function statCard(label, value, color) {
 }
 
 function activeJobCard(job, forceRender) {
+  return React.createElement(ActiveJobCard, { key: job.id, job: job, forceRender: forceRender });
+}
+
+function ActiveJobCard(props) {
+  var useState = React.useState;
+  var job = props.job;
   var step = job.status;
-  return React.createElement(PdCard, { key: job.id, style: { padding: 14, borderLeft: "3px solid " + PD.green } },
+  var [pinEntry, setPinEntry] = useState("");
+  var [pinError, setPinError] = useState(false);
+
+  function tryDeliver() {
+    if (pinEntry.length !== 4) { setPinError(true); return; }
+    if (pdVerifyDeliveryPIN(job.id, pinEntry)) {
+      pdCompleteDelivery(job.id);
+      pdToast(pd("delivered") + " ✓", "success");
+      props.forceRender(Date.now());
+    } else {
+      setPinError(true);
+      pdToast("Code incorrect", "error");
+      setTimeout(function(){ setPinError(false); setPinEntry(""); }, 1200);
+    }
+  }
+
+  return React.createElement(PdCard, { style: { padding: 14, borderLeft: "3px solid " + PD.green } },
     React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: PD.green, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 } },
       pdOrderStatusLabel(step)
     ),
@@ -308,17 +330,62 @@ function activeJobCard(job, forceRender) {
 
     step === PD_ORDER_STATUS.DRIVER_ASSIGNED && React.createElement(PdBtn, {
       variant: "primary", fullWidth: true,
-      onClick: function() { pdPickupPackage(job.id); pdToast(pd("pickupPackage") + " ✓", "success"); forceRender(Date.now()); }
+      onClick: function() { pdPickupPackage(job.id); pdToast(pd("pickupPackage") + " ✓", "success"); props.forceRender(Date.now()); }
     }, Pdi.qr, pd("pickupPackage")),
 
     step === PD_ORDER_STATUS.PICKED_UP && React.createElement(PdBtn, {
       variant: "primary", fullWidth: true,
-      onClick: function() { pdStartDelivery(job.id); pdToast(pd("driverOnWay") + " ✓", "info"); forceRender(Date.now()); }
+      onClick: function() { pdStartDelivery(job.id); pdToast(pd("driverOnWay") + " ✓", "info"); props.forceRender(Date.now()); }
     }, Pdi.truck, pd("goToCustomer")),
 
-    step === PD_ORDER_STATUS.DELIVERING && React.createElement(PdBtn, {
-      variant: "primary", fullWidth: true,
-      onClick: function() { pdCompleteDelivery(job.id); pdToast(pd("delivered") + " ✓", "success"); forceRender(Date.now()); }
-    }, Pdi.check, pd("confirmDelivery"))
+    /* Delivery — PIN entry required */
+    step === PD_ORDER_STATUS.DELIVERING && React.createElement("div", null,
+      React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: PD.text, marginBottom: 8 } }, "🔐 Demande le code au client"),
+      React.createElement("div", { style: { display: "flex", gap: 6, justifyContent: "center", marginBottom: 10 } },
+        [0,1,2,3].map(function(i) {
+          var filled = i < pinEntry.length;
+          return React.createElement("div", {
+            key: i,
+            style: {
+              width: 44, height: 52, borderRadius: 10,
+              border: "2px solid " + (pinError ? PD.red : (filled ? PD.green : PD.grey200)),
+              background: pinError ? PD.redSoft : (filled ? PD.greenLight : PD.grey50),
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 22, fontWeight: 800, color: pinError ? PD.red : PD.text,
+            }
+          }, filled ? pinEntry.charAt(i) : "");
+        })
+      ),
+      /* Numpad */
+      React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 } },
+        [1,2,3,4,5,6,7,8,9,"del",0,"ok"].map(function(k) {
+          if (k === "del") return React.createElement("button", {
+            key: "del",
+            onClick: function() { setPinError(false); setPinEntry(pinEntry.slice(0, -1)); },
+            style: numKeyStyle(PD.grey100)
+          }, "⌫");
+          if (k === "ok") return React.createElement("button", {
+            key: "ok",
+            onClick: tryDeliver,
+            disabled: pinEntry.length !== 4,
+            style: Object.assign({}, numKeyStyle(pinEntry.length === 4 ? PD.green : PD.grey200), { color: pinEntry.length === 4 ? "white" : PD.textMuted })
+          }, "✓");
+          return React.createElement("button", {
+            key: k,
+            onClick: function() { if (pinEntry.length < 4) { setPinError(false); setPinEntry(pinEntry + k); } },
+            style: numKeyStyle("white")
+          }, k);
+        })
+      )
+    )
   );
+}
+
+function numKeyStyle(bg) {
+  return {
+    padding: "14px 0", borderRadius: 10,
+    background: bg, border: "1px solid " + PD.grey200,
+    color: PD.text, fontSize: 20, fontWeight: 700,
+    cursor: "pointer", fontFamily: "inherit",
+  };
 }

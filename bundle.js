@@ -1,4 +1,4 @@
-/* PharmaDroid — Bundled 2026-04-16T17:06:52.910Z */
+/* PharmaDroid — Bundled 2026-04-16T17:37:12.373Z */
 
 
 /* ══════ js/config.js ══════ */
@@ -58,7 +58,7 @@ const PD = {
 };
 
 /* App identity */
-const PD_APP_NAME    = "PharmaDroid";
+const PD_APP_NAME    = "Pharmadroid";
 const PD_APP_TAGLINE = "Ta pharmacie intelligente";
 const PD_VERSION     = "1.0.0";
 
@@ -167,7 +167,7 @@ var _pdLang = localStorage.getItem(PD_KEYS.lang) || "fr";
 const PD_I18N = {
   /* ═══ FRANCAIS ═══ */
   fr: {
-    appName: "PharmaDroid",
+    appName: "Pharmadroid",
     tagline: "Ta pharmacie intelligente",
     loading: "Chargement...",
 
@@ -395,6 +395,8 @@ const PD_I18N = {
     deliveryFee: "Frais de livraison",
     deliveryTotal: "Total avec livraison",
     trackOrder: "Suivre ma commande",
+    driverAssignedLabel: "Livreur assigne",
+    driverPickedUpLabel: "Colis recupere",
     driverOnWay: "Livreur en route",
     driverArrivedPharmacy: "Livreur a la pharmacie",
     driverArrivedHome: "Livreur arrive",
@@ -472,7 +474,7 @@ const PD_I18N = {
     resubmit: "Resoumettre",
 
     /* Onboarding */
-    welcome: "Bienvenue sur PharmaDroid",
+    welcome: "Bienvenue sur Pharmadroid",
     welcomeDesc: "Ta pharmacie intelligente et connectee",
     onb1Title: "Commande avant d'arriver",
     onb1Desc: "Scanne ton ordonnance chez toi, la pharmacie prepare, tu passes recuperer",
@@ -486,7 +488,7 @@ const PD_I18N = {
 
   /* ═══ ENGLISH ═══ */
   en: {
-    appName: "PharmaDroid", tagline: "Your smart pharmacy", loading: "Loading...",
+    appName: "Pharmadroid", tagline: "Your smart pharmacy", loading: "Loading...",
     navHome: "Home", navSearch: "Search", navScan: "Scan", navOrders: "Orders",
     navProfile: "Profile", navSettings: "Settings",
     search: "Search", cancel: "Cancel", ok: "OK", confirm: "Confirm", save: "Save",
@@ -562,7 +564,7 @@ const PD_I18N = {
     tapToScan: "Tap to scan", prescription: "Prescription", box: "Box",
     pill: "Pill", tablet: "Tablet", capsule: "Capsule", syrup: "Syrup",
     injection: "Injection", cream: "Cream", drops: "Drops", patch: "Patch",
-    welcome: "Welcome to PharmaDroid",
+    welcome: "Welcome to Pharmadroid",
     welcomeDesc: "Your smart connected pharmacy",
     onb1Title: "Order before you arrive",
     onb1Desc: "Scan your prescription at home, the pharmacy prepares, you pick up",
@@ -576,7 +578,10 @@ const PD_I18N = {
     deliveryOption: "Home delivery",
     deliveryDesc: "A verified driver brings it to you",
     deliveryFee: "Delivery fee", deliveryTotal: "Total with delivery",
-    trackOrder: "Track my order", driverOnWay: "Driver on the way",
+    trackOrder: "Track my order",
+    driverAssignedLabel: "Driver assigned",
+    driverPickedUpLabel: "Package picked up",
+    driverOnWay: "Driver on the way",
     driverArrivedPharmacy: "Driver at pharmacy",
     driverArrivedHome: "Driver arrived",
     estDeliveryTime: "Estimated arrival", delivered: "Delivered",
@@ -632,33 +637,33 @@ function pdAddLang(code, name, tagline, greeting, search, nav) {
     navScan: nav.scan, navOrders: nav.orders, navProfile: nav.profile,
   });
 }
-pdAddLang("es", "PharmaDroid", "Tu farmacia inteligente", "Buenos dias",
+pdAddLang("es", "Pharmadroid", "Tu farmacia inteligente", "Buenos dias",
   "Buscar", { home: "Inicio", search: "Buscar", scan: "Escanear", orders: "Pedidos", profile: "Perfil" });
-pdAddLang("pt", "PharmaDroid", "Sua farmacia inteligente", "Bom dia",
+pdAddLang("pt", "Pharmadroid", "Sua farmacia inteligente", "Bom dia",
   "Buscar", { home: "Inicio", search: "Buscar", scan: "Escanear", orders: "Pedidos", profile: "Perfil" });
-pdAddLang("de", "PharmaDroid", "Deine intelligente Apotheke", "Guten Morgen",
+pdAddLang("de", "Pharmadroid", "Deine intelligente Apotheke", "Guten Morgen",
   "Suchen", { home: "Start", search: "Suchen", scan: "Scannen", orders: "Bestellungen", profile: "Profil" });
-pdAddLang("it", "PharmaDroid", "La tua farmacia intelligente", "Buongiorno",
+pdAddLang("it", "Pharmadroid", "La tua farmacia intelligente", "Buongiorno",
   "Cerca", { home: "Home", search: "Cerca", scan: "Scansiona", orders: "Ordini", profile: "Profilo" });
-pdAddLang("nl", "PharmaDroid", "Jouw slimme apotheek", "Goedemorgen",
+pdAddLang("nl", "Pharmadroid", "Jouw slimme apotheek", "Goedemorgen",
   "Zoeken", { home: "Home", search: "Zoeken", scan: "Scan", orders: "Bestellingen", profile: "Profiel" });
-pdAddLang("tr", "PharmaDroid", "Akilli eczaneniz", "Gunaydin",
+pdAddLang("tr", "Pharmadroid", "Akilli eczaneniz", "Gunaydin",
   "Ara", { home: "Ana sayfa", search: "Ara", scan: "Tara", orders: "Siparisler", profile: "Profil" });
-pdAddLang("ru", "PharmaDroid", "Vasha umnaya apteka", "Dobroye utro",
+pdAddLang("ru", "Pharmadroid", "Vasha umnaya apteka", "Dobroye utro",
   "Poisk", { home: "Glavnaya", search: "Poisk", scan: "Skan", orders: "Zakazy", profile: "Profil" });
-pdAddLang("ar", "PharmaDroid", "Saydaliyatuka adh-dhakiyya", "Sabah al-khayr",
+pdAddLang("ar", "Pharmadroid", "Saydaliyatuka adh-dhakiyya", "Sabah al-khayr",
   "Bahth", { home: "Ar-ra'isiyya", search: "Bahth", scan: "Mashh", orders: "Talabat", profile: "Al-malaf" });
-pdAddLang("zh", "PharmaDroid", "Nin de zhineng yaodian", "Zao shang hao",
+pdAddLang("zh", "Pharmadroid", "Nin de zhineng yaodian", "Zao shang hao",
   "Sousuo", { home: "Shouye", search: "Sousuo", scan: "Saomiao", orders: "Dingdan", profile: "Gerenziliao" });
-pdAddLang("ja", "PharmaDroid", "Anata no sumato yakkyoku", "Ohayou",
+pdAddLang("ja", "Pharmadroid", "Anata no sumato yakkyoku", "Ohayou",
   "Kensaku", { home: "Homu", search: "Kensaku", scan: "Sukyan", orders: "Chumon", profile: "Purofairu" });
-pdAddLang("ko", "PharmaDroid", "Danshin-ui smart yakguk", "Annyeonghaseyo",
+pdAddLang("ko", "Pharmadroid", "Danshin-ui smart yakguk", "Annyeonghaseyo",
   "Geomsaek", { home: "Hom", search: "Geomsaek", scan: "Seukaen", orders: "Jumun", profile: "Peuropil" });
-pdAddLang("hi", "PharmaDroid", "Aapki smart pharmacy", "Namaste",
+pdAddLang("hi", "Pharmadroid", "Aapki smart pharmacy", "Namaste",
   "Khojo", { home: "Ghar", search: "Khojo", scan: "Scan", orders: "Orders", profile: "Profile" });
-pdAddLang("sw", "PharmaDroid", "Duka lako la dawa la akili", "Habari ya asubuhi",
+pdAddLang("sw", "Pharmadroid", "Duka lako la dawa la akili", "Habari ya asubuhi",
   "Tafuta", { home: "Nyumbani", search: "Tafuta", scan: "Changanua", orders: "Maagizo", profile: "Wasifu" });
-pdAddLang("pl", "PharmaDroid", "Twoja inteligentna apteka", "Dzien dobry",
+pdAddLang("pl", "Pharmadroid", "Twoja inteligentna apteka", "Dzien dobry",
   "Szukaj", { home: "Glowna", search: "Szukaj", scan: "Skanuj", orders: "Zamowienia", profile: "Profil" });
 
 /* Translation lookup */
@@ -1741,6 +1746,7 @@ function pdResetAll() {
 
 function pdCreateOrder(items, pharmacyId, deliveryType, address) {
   var pharmacy = pdFindPharmacy(pharmacyId);
+  var isDelivery = deliveryType === PD_DELIVERY.DELIVERY;
   var order = {
     items: items || [],
     pharmacyId: pharmacyId,
@@ -1749,14 +1755,27 @@ function pdCreateOrder(items, pharmacyId, deliveryType, address) {
     address: address || "",
     status: PD_ORDER_STATUS.SENT,
     estPrepTime: pharmacy ? pharmacy.avgPrepTime : 10,
-    deliveryFee: deliveryType === PD_DELIVERY.DELIVERY ? PD_DELIVERY_FEE : 0,
+    deliveryFee: isDelivery ? PD_DELIVERY_FEE : 0,
     driverId: null,
     driverName: null,
     qrCode: pdGenerateQRData(),
+    deliveryPIN: isDelivery ? pdGenerateDeliveryPIN() : null,
     timeline: [{ status: PD_ORDER_STATUS.SENT, at: Date.now() }],
   };
   order.id = pdAddOrder(order);
   return order;
+}
+
+/* 4-digit PIN that client shows driver to confirm reception. Never shown to driver in-app. */
+function pdGenerateDeliveryPIN() {
+  return String(1000 + Math.floor(Math.random() * 9000));
+}
+
+/* Driver attempts delivery with a PIN — returns true if match */
+function pdVerifyDeliveryPIN(orderId, pin) {
+  var order = pdFindOrder(orderId);
+  if (!order) return false;
+  return order.deliveryPIN && String(order.deliveryPIN) === String(pin);
 }
 
 function pdGenerateQRData() {
@@ -1823,8 +1842,8 @@ function pdOrderStatusLabel(status) {
     case PD_ORDER_STATUS.SENT:           return pd("orderSent");
     case PD_ORDER_STATUS.PREPARING:      return pd("orderPreparing");
     case PD_ORDER_STATUS.READY:          return pd("orderReady");
-    case PD_ORDER_STATUS.DRIVER_ASSIGNED:return pd("driverOnWay");
-    case PD_ORDER_STATUS.PICKED_UP:      return pd("driverArrivedPharmacy");
+    case PD_ORDER_STATUS.DRIVER_ASSIGNED:return pd("driverAssignedLabel");
+    case PD_ORDER_STATUS.PICKED_UP:      return pd("driverPickedUpLabel");
     case PD_ORDER_STATUS.DELIVERING:     return pd("driverOnWay");
     case PD_ORDER_STATUS.COLLECTED:      return pd("delivered");
     case PD_ORDER_STATUS.CANCELLED:      return pd("orderCancelled");
@@ -2234,28 +2253,35 @@ const PD_SCAN_MODE = {
 /* ══════ js/components.js ══════ */
 /* PharmaDroid — Shared React components */
 
-/* === LOGO === */
+/* === LOGO — Pharmacy droid === */
 function PdLogo(props) {
   var size = props.size || 64;
+  var fill = props.fill || PD.green;
+  var bg = props.bg || "white";
   return React.createElement("svg", {
-    width: size, height: size, viewBox: "0 0 100 100", fill: "none",
+    width: size, height: (size * 130 / 120), viewBox: "0 0 120 130", fill: "none",
     style: { filter: "drop-shadow(0 4px 12px " + PD.greenGlow + ")" },
   },
-    /* Rounded shield */
-    React.createElement("rect", { x: 10, y: 10, width: 80, height: 80, rx: 22,
-      fill: "url(#pdLogoG)", }),
-    React.createElement("defs", null,
-      React.createElement("linearGradient", { id: "pdLogoG", x1: 0, y1: 0, x2: 1, y2: 1 },
-        React.createElement("stop", { offset: "0", "stop-color": PD.green }),
-        React.createElement("stop", { offset: "1", "stop-color": PD.greenDark })
-      )
-    ),
-    /* Cross + capsule */
-    React.createElement("rect", { x: 43, y: 26, width: 14, height: 48, rx: 4, fill: "white" }),
-    React.createElement("rect", { x: 26, y: 43, width: 48, height: 14, rx: 4, fill: "white" }),
-    /* Small pill accent */
-    React.createElement("circle", { cx: 50, cy: 50, r: 5, fill: PD.green }),
-    React.createElement("circle", { cx: 50, cy: 50, r: 2, fill: "white" })
+    /* Antennas */
+    React.createElement("line", { x1: 42, y1: 20, x2: 33, y2: 8, stroke: fill, "stroke-width": 3.5, "stroke-linecap": "round" }),
+    React.createElement("circle", { cx: 31, cy: 6, r: 3.5, fill: fill }),
+    React.createElement("line", { x1: 78, y1: 20, x2: 87, y2: 8, stroke: fill, "stroke-width": 3.5, "stroke-linecap": "round" }),
+    React.createElement("circle", { cx: 89, cy: 6, r: 3.5, fill: fill }),
+    /* Head */
+    React.createElement("path", { d: "M26 44 C26 28 40 18 60 18 C80 18 94 28 94 44 L94 60 C94 65 90 68 85 68 L35 68 C30 68 26 65 26 60 Z", fill: fill }),
+    React.createElement("circle", { cx: 45, cy: 42, r: 5, fill: bg }),
+    React.createElement("circle", { cx: 75, cy: 42, r: 5, fill: bg }),
+    /* Body (pharmacy box) */
+    React.createElement("rect", { x: 28, y: 72, width: 64, height: 44, rx: 8, fill: fill }),
+    /* Arms */
+    React.createElement("rect", { x: 14, y: 72, width: 12, height: 34, rx: 6, fill: fill }),
+    React.createElement("rect", { x: 94, y: 72, width: 12, height: 34, rx: 6, fill: fill }),
+    /* Cross on body */
+    React.createElement("rect", { x: 36, y: 85, width: 48, height: 18, rx: 4, fill: bg }),
+    React.createElement("rect", { x: 51, y: 76, width: 18, height: 36, rx: 4, fill: bg }),
+    /* Legs */
+    React.createElement("rect", { x: 36, y: 118, width: 18, height: 10, rx: 5, fill: fill, opacity: 0.7 }),
+    React.createElement("rect", { x: 66, y: 118, width: 18, height: 10, rx: 5, fill: fill, opacity: 0.7 })
   );
 }
 
@@ -2447,25 +2473,14 @@ function HomeScreen(props) {
     } },
       React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 } },
         React.createElement("div", null,
-          React.createElement("div", { style: { color: PD.textMuted, fontSize: 12, fontWeight: 600 } }, pdGreeting()),
+          React.createElement("div", { style: { color: PD.textMuted, fontSize: 12, fontWeight: 600 } }, "Bienvenue sur,"),
           React.createElement("div", { style: { color: PD.text, fontSize: 22, fontWeight: 800, marginTop: 2 } },
-            profile.name || "Bonjour 👋"
+            "Pharmadroid"
           )
         ),
-        React.createElement("div", { style: { display: "flex", gap: 10 } },
-          React.createElement("button", { onClick: props.onBell, style: iconBtnStyle() },
-            Pdi.bell,
-            React.createElement("span", { style: notifDotStyle(activeOrders.length > 0) })
-          ),
-          React.createElement("button", {
-            onClick: props.onProfile,
-            style: {
-              width: 42, height: 42, borderRadius: 14,
-              background: "linear-gradient(135deg, " + PD.green + ", " + PD.greenDark + ")",
-              border: "none", color: "white", fontSize: 15, fontWeight: 800,
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-            }
-          }, (profile.name || "U").substring(0, 1).toUpperCase())
+        React.createElement("button", { onClick: props.onBell, style: iconBtnStyle() },
+          Pdi.bell,
+          React.createElement("span", { style: notifDotStyle(activeOrders.length > 0) })
         )
       ),
 
@@ -3184,8 +3199,10 @@ function CheckoutScreen(props) {
 
   var subtotal = items.reduce(function(s, it) { return s + (it.price || 2.50) * (it.qty || 1); }, 0);
   var fee = deliveryType === PD_DELIVERY.DELIVERY ? PD_DELIVERY_FEE : 0;
+  /* Sticky footer occupies ~220px with delivery fee row. Leave generous bottom padding. */
+  var footerPad = fee > 0 ? 230 : 190;
 
-  return React.createElement("div", { style: { paddingBottom: 120 } },
+  return React.createElement("div", { style: { paddingBottom: footerPad } },
     React.createElement("div", { style: { padding: "14px 22px", display: "flex", alignItems: "center", gap: 12, background: "white", borderBottom: "1px solid " + PD.grey200 } },
       React.createElement("button", { onClick: props.onBack, style: iconBtnStyle() }, Pdi.back),
       React.createElement("div", { style: { flex: 1, fontSize: 18, fontWeight: 800, color: PD.text } }, pd("newOrder"))
@@ -3421,8 +3438,9 @@ function OrderTrackScreen(props) {
       )
     ),
 
-    /* QR Code (when ready) */
-    (order.status === PD_ORDER_STATUS.READY || order.status === PD_ORDER_STATUS.DRIVER_ASSIGNED || order.status === PD_ORDER_STATUS.PICKED_UP) && React.createElement("div", { style: { padding: "0 22px 20px" } },
+    /* QR Code for pickup (when ready) */
+    order.deliveryType === PD_DELIVERY.PICKUP &&
+    (order.status === PD_ORDER_STATUS.READY) && React.createElement("div", { style: { padding: "0 22px 20px" } },
       React.createElement(PdCard, { style: { padding: 20, textAlign: "center" } },
         React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: PD.text, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 12 } }, pd("orderQR")),
         React.createElement("div", {
@@ -3431,6 +3449,31 @@ function OrderTrackScreen(props) {
         }),
         React.createElement("div", { style: { fontSize: 13, color: PD.textLight, marginTop: 14, letterSpacing: "0.1em", fontWeight: 700 } }, order.qrCode),
         React.createElement("div", { style: { fontSize: 12, color: PD.textMuted, marginTop: 6 } }, pd("showAtCounter"))
+      )
+    ),
+
+    /* Delivery PIN for home delivery (visible once driver is assigned) */
+    order.deliveryType === PD_DELIVERY.DELIVERY && order.deliveryPIN &&
+    (order.status === PD_ORDER_STATUS.DRIVER_ASSIGNED ||
+     order.status === PD_ORDER_STATUS.PICKED_UP ||
+     order.status === PD_ORDER_STATUS.DELIVERING) && React.createElement("div", { style: { padding: "0 22px 20px" } },
+      React.createElement(PdCard, { style: { padding: 24, textAlign: "center", border: "2px solid " + PD.green, background: PD.greenLight } },
+        React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: PD.greenDark, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 10 } }, "🔐 Code de livraison"),
+        React.createElement("div", {
+          style: {
+            fontSize: 42, fontWeight: 800, color: PD.greenDark,
+            letterSpacing: "0.3em", fontFamily: "'Plus Jakarta Sans',monospace",
+            padding: "12px 0", background: "white", borderRadius: 14,
+            margin: "0 auto", display: "inline-block",
+            minWidth: 220, boxShadow: "inset 0 0 0 2px " + PD.greenMid,
+          }
+        }, order.deliveryPIN.split("").join(" ")),
+        React.createElement("div", { style: { fontSize: 12, color: PD.textLight, marginTop: 14, lineHeight: 1.5, padding: "0 10px" } },
+          "Communique ce code au livreur uniquement a la reception."
+        ),
+        React.createElement("div", { style: { fontSize: 11, color: PD.red, marginTop: 8, fontWeight: 700 } },
+          "⚠️ Ne le partage JAMAIS avant d'avoir le colis en main."
+        )
       )
     ),
 
@@ -4208,8 +4251,30 @@ function statCard(label, value, color) {
 }
 
 function activeJobCard(job, forceRender) {
+  return React.createElement(ActiveJobCard, { key: job.id, job: job, forceRender: forceRender });
+}
+
+function ActiveJobCard(props) {
+  var useState = React.useState;
+  var job = props.job;
   var step = job.status;
-  return React.createElement(PdCard, { key: job.id, style: { padding: 14, borderLeft: "3px solid " + PD.green } },
+  var [pinEntry, setPinEntry] = useState("");
+  var [pinError, setPinError] = useState(false);
+
+  function tryDeliver() {
+    if (pinEntry.length !== 4) { setPinError(true); return; }
+    if (pdVerifyDeliveryPIN(job.id, pinEntry)) {
+      pdCompleteDelivery(job.id);
+      pdToast(pd("delivered") + " ✓", "success");
+      props.forceRender(Date.now());
+    } else {
+      setPinError(true);
+      pdToast("Code incorrect", "error");
+      setTimeout(function(){ setPinError(false); setPinEntry(""); }, 1200);
+    }
+  }
+
+  return React.createElement(PdCard, { style: { padding: 14, borderLeft: "3px solid " + PD.green } },
     React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: PD.green, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 } },
       pdOrderStatusLabel(step)
     ),
@@ -4218,19 +4283,64 @@ function activeJobCard(job, forceRender) {
 
     step === PD_ORDER_STATUS.DRIVER_ASSIGNED && React.createElement(PdBtn, {
       variant: "primary", fullWidth: true,
-      onClick: function() { pdPickupPackage(job.id); pdToast(pd("pickupPackage") + " ✓", "success"); forceRender(Date.now()); }
+      onClick: function() { pdPickupPackage(job.id); pdToast(pd("pickupPackage") + " ✓", "success"); props.forceRender(Date.now()); }
     }, Pdi.qr, pd("pickupPackage")),
 
     step === PD_ORDER_STATUS.PICKED_UP && React.createElement(PdBtn, {
       variant: "primary", fullWidth: true,
-      onClick: function() { pdStartDelivery(job.id); pdToast(pd("driverOnWay") + " ✓", "info"); forceRender(Date.now()); }
+      onClick: function() { pdStartDelivery(job.id); pdToast(pd("driverOnWay") + " ✓", "info"); props.forceRender(Date.now()); }
     }, Pdi.truck, pd("goToCustomer")),
 
-    step === PD_ORDER_STATUS.DELIVERING && React.createElement(PdBtn, {
-      variant: "primary", fullWidth: true,
-      onClick: function() { pdCompleteDelivery(job.id); pdToast(pd("delivered") + " ✓", "success"); forceRender(Date.now()); }
-    }, Pdi.check, pd("confirmDelivery"))
+    /* Delivery — PIN entry required */
+    step === PD_ORDER_STATUS.DELIVERING && React.createElement("div", null,
+      React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: PD.text, marginBottom: 8 } }, "🔐 Demande le code au client"),
+      React.createElement("div", { style: { display: "flex", gap: 6, justifyContent: "center", marginBottom: 10 } },
+        [0,1,2,3].map(function(i) {
+          var filled = i < pinEntry.length;
+          return React.createElement("div", {
+            key: i,
+            style: {
+              width: 44, height: 52, borderRadius: 10,
+              border: "2px solid " + (pinError ? PD.red : (filled ? PD.green : PD.grey200)),
+              background: pinError ? PD.redSoft : (filled ? PD.greenLight : PD.grey50),
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 22, fontWeight: 800, color: pinError ? PD.red : PD.text,
+            }
+          }, filled ? pinEntry.charAt(i) : "");
+        })
+      ),
+      /* Numpad */
+      React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 } },
+        [1,2,3,4,5,6,7,8,9,"del",0,"ok"].map(function(k) {
+          if (k === "del") return React.createElement("button", {
+            key: "del",
+            onClick: function() { setPinError(false); setPinEntry(pinEntry.slice(0, -1)); },
+            style: numKeyStyle(PD.grey100)
+          }, "⌫");
+          if (k === "ok") return React.createElement("button", {
+            key: "ok",
+            onClick: tryDeliver,
+            disabled: pinEntry.length !== 4,
+            style: Object.assign({}, numKeyStyle(pinEntry.length === 4 ? PD.green : PD.grey200), { color: pinEntry.length === 4 ? "white" : PD.textMuted })
+          }, "✓");
+          return React.createElement("button", {
+            key: k,
+            onClick: function() { if (pinEntry.length < 4) { setPinError(false); setPinEntry(pinEntry + k); } },
+            style: numKeyStyle("white")
+          }, k);
+        })
+      )
+    )
   );
+}
+
+function numKeyStyle(bg) {
+  return {
+    padding: "14px 0", borderRadius: 10,
+    background: bg, border: "1px solid " + PD.grey200,
+    color: PD.text, fontSize: 20, fontWeight: 700,
+    cursor: "pointer", fontFamily: "inherit",
+  };
 }
 
 

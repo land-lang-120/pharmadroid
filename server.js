@@ -13,7 +13,15 @@ const MIME = {
 http.createServer((req, res) => {
   let url = req.url.split('?')[0];
   if (url === '/') url = '/index.html';
-  const fp = path.join(__dirname, url);
+  if (url.endsWith('/')) url = url + 'index.html';
+  let fp = path.join(__dirname, url);
+  /* If no extension, try adding /index.html */
+  if (!path.extname(fp)) {
+    try {
+      const stat = fs.statSync(fp);
+      if (stat.isDirectory()) fp = path.join(fp, 'index.html');
+    } catch (e) {}
+  }
   const ext = path.extname(fp);
   fs.readFile(fp, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }

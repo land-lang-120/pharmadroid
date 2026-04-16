@@ -1,27 +1,34 @@
 /* PharmaDroid — Shared React components */
 
-/* === LOGO === */
+/* === LOGO — Pharmacy droid === */
 function PdLogo(props) {
   var size = props.size || 64;
+  var fill = props.fill || PD.green;
+  var bg = props.bg || "white";
   return React.createElement("svg", {
-    width: size, height: size, viewBox: "0 0 100 100", fill: "none",
+    width: size, height: (size * 130 / 120), viewBox: "0 0 120 130", fill: "none",
     style: { filter: "drop-shadow(0 4px 12px " + PD.greenGlow + ")" },
   },
-    /* Rounded shield */
-    React.createElement("rect", { x: 10, y: 10, width: 80, height: 80, rx: 22,
-      fill: "url(#pdLogoG)", }),
-    React.createElement("defs", null,
-      React.createElement("linearGradient", { id: "pdLogoG", x1: 0, y1: 0, x2: 1, y2: 1 },
-        React.createElement("stop", { offset: "0", "stop-color": PD.green }),
-        React.createElement("stop", { offset: "1", "stop-color": PD.greenDark })
-      )
-    ),
-    /* Cross + capsule */
-    React.createElement("rect", { x: 43, y: 26, width: 14, height: 48, rx: 4, fill: "white" }),
-    React.createElement("rect", { x: 26, y: 43, width: 48, height: 14, rx: 4, fill: "white" }),
-    /* Small pill accent */
-    React.createElement("circle", { cx: 50, cy: 50, r: 5, fill: PD.green }),
-    React.createElement("circle", { cx: 50, cy: 50, r: 2, fill: "white" })
+    /* Antennas */
+    React.createElement("line", { x1: 42, y1: 20, x2: 33, y2: 8, stroke: fill, "stroke-width": 3.5, "stroke-linecap": "round" }),
+    React.createElement("circle", { cx: 31, cy: 6, r: 3.5, fill: fill }),
+    React.createElement("line", { x1: 78, y1: 20, x2: 87, y2: 8, stroke: fill, "stroke-width": 3.5, "stroke-linecap": "round" }),
+    React.createElement("circle", { cx: 89, cy: 6, r: 3.5, fill: fill }),
+    /* Head */
+    React.createElement("path", { d: "M26 44 C26 28 40 18 60 18 C80 18 94 28 94 44 L94 60 C94 65 90 68 85 68 L35 68 C30 68 26 65 26 60 Z", fill: fill }),
+    React.createElement("circle", { cx: 45, cy: 42, r: 5, fill: bg }),
+    React.createElement("circle", { cx: 75, cy: 42, r: 5, fill: bg }),
+    /* Body (pharmacy box) */
+    React.createElement("rect", { x: 28, y: 72, width: 64, height: 44, rx: 8, fill: fill }),
+    /* Arms */
+    React.createElement("rect", { x: 14, y: 72, width: 12, height: 34, rx: 6, fill: fill }),
+    React.createElement("rect", { x: 94, y: 72, width: 12, height: 34, rx: 6, fill: fill }),
+    /* Cross on body */
+    React.createElement("rect", { x: 36, y: 85, width: 48, height: 18, rx: 4, fill: bg }),
+    React.createElement("rect", { x: 51, y: 76, width: 18, height: 36, rx: 4, fill: bg }),
+    /* Legs */
+    React.createElement("rect", { x: 36, y: 118, width: 18, height: 10, rx: 5, fill: fill, opacity: 0.7 }),
+    React.createElement("rect", { x: 66, y: 118, width: 18, height: 10, rx: 5, fill: fill, opacity: 0.7 })
   );
 }
 

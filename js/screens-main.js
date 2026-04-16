@@ -20,25 +20,14 @@ function HomeScreen(props) {
     } },
       React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 } },
         React.createElement("div", null,
-          React.createElement("div", { style: { color: PD.textMuted, fontSize: 12, fontWeight: 600 } }, pdGreeting()),
+          React.createElement("div", { style: { color: PD.textMuted, fontSize: 12, fontWeight: 600 } }, "Bienvenue sur,"),
           React.createElement("div", { style: { color: PD.text, fontSize: 22, fontWeight: 800, marginTop: 2 } },
-            profile.name || "Bonjour 👋"
+            "Pharmadroid"
           )
         ),
-        React.createElement("div", { style: { display: "flex", gap: 10 } },
-          React.createElement("button", { onClick: props.onBell, style: iconBtnStyle() },
-            Pdi.bell,
-            React.createElement("span", { style: notifDotStyle(activeOrders.length > 0) })
-          ),
-          React.createElement("button", {
-            onClick: props.onProfile,
-            style: {
-              width: 42, height: 42, borderRadius: 14,
-              background: "linear-gradient(135deg, " + PD.green + ", " + PD.greenDark + ")",
-              border: "none", color: "white", fontSize: 15, fontWeight: 800,
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-            }
-          }, (profile.name || "U").substring(0, 1).toUpperCase())
+        React.createElement("button", { onClick: props.onBell, style: iconBtnStyle() },
+          Pdi.bell,
+          React.createElement("span", { style: notifDotStyle(activeOrders.length > 0) })
         )
       ),
 
