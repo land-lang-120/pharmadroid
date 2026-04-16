@@ -1,4 +1,4 @@
-/* PharmaDroid — Bundled 2026-04-16T14:38:16.840Z */
+/* PharmaDroid — Bundled 2026-04-16T17:06:52.910Z */
 
 
 /* ══════ js/config.js ══════ */
@@ -1520,17 +1520,26 @@ function pdFindInteraction(molA, molB) {
   return null;
 }
 
-/* Check all pairs in a list of meds, return list of interactions */
+/* Check all pairs in a list of meds, return list of interactions.
+ * Tries to match on DCI, then brand name, so rules like "aspirine" can match
+ * meds with DCI "Acide acetylsalicylique" via brand "Aspirine UPSA".
+ */
 function pdCheckInteractions(medList) {
   var results = [];
   for (var i = 0; i < medList.length; i++) {
     for (var j = i + 1; j < medList.length; j++) {
       var medA = medList[i], medB = medList[j];
-      var interaction = pdFindInteraction(medA.dci || medA.brand, medB.dci || medB.brand);
+      var namesA = [medA.dci, medA.brand].filter(Boolean);
+      var namesB = [medB.dci, medB.brand].filter(Boolean);
+      var interaction = null;
+      for (var a = 0; a < namesA.length && !interaction; a++) {
+        for (var b = 0; b < namesB.length && !interaction; b++) {
+          interaction = pdFindInteraction(namesA[a], namesB[b]);
+        }
+      }
       if (interaction && interaction.severity > 0) {
         results.push({
-          medA: medA,
-          medB: medB,
+          medA: medA, medB: medB,
           severity: interaction.severity,
           reason_fr: interaction.reason_fr,
           reason_en: interaction.reason_en,
